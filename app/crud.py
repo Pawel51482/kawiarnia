@@ -1,8 +1,14 @@
 from sqlalchemy.future import select
-from fastapi import HTTPException
-from models import User
+from fastapi import FastAPI, Depends, HTTPException
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from app.schemas import UserCreate, UserLogin
+from app.models import User
 from app.models import Coffee
-from auth import hash_password
+from app.auth import hash_password
+from app.database import get_db
+from sqlalchemy.ext.asyncio import AsyncSession
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
 async def get_coffees(db):
     try:

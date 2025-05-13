@@ -7,7 +7,6 @@ from sqlalchemy.ext.asyncio import AsyncSession
 
 # Tworzenie aplikacji FastAPI
 app = FastAPI()
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/token")
 
 @app.on_event("startup")
 async def startup():
