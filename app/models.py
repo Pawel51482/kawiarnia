@@ -7,3 +7,11 @@ class Coffee(Base):
     name = Column(String, nullable=False)
     description = Column(String)
     price = Column(Float, nullable=False)
+
+class User(Base):
+    __tablename__ = "users"
+    id = Column(Integer, Sequence("coffee_id_seq"), primary_key=True, index=True, autoincrement=True)
+    username = Column(String, nullable=False)
+    email = Column(String)
+    hashed_password = Column(String, nullable=False)
+
