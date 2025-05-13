@@ -11,6 +11,8 @@ services:
       - "5432:5432"
   backend:
     build: .
+    env_file:
+      - .env
     depends_on:
       - db
     environment:

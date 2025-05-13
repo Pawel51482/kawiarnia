@@ -6,3 +6,4 @@ pydantic>=2.3.0
 passlib[bcrypt]
 python-jose
 python-multipart
+python-dotenv
