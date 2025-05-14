@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 from pydantic import BaseModel
 from typing import Optional
 from datetime import date, time
+=======
+from pydantic import BaseModel, EmailStr
+>>>>>>> 2d8d4e27cde07532b66684c1363dd542fe6bd5ab
 
 class CoffeeBase(BaseModel):
     name: str
@@ -18,10 +22,12 @@ class Coffee(CoffeeBase):
 
 class UserCreate(BaseModel):
     username: str
+    email: EmailStr
     password: str
 
 class UserLogin(BaseModel):
-    username: str
+    username: str | None = None
+    email: EmailStr | None = None
     password: str
 
 class Token(BaseModel):
