@@ -1,7 +1,6 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import date, time
-from pydantic import BaseModel, EmailStr
 
 class CoffeeBase(BaseModel):
     name: str
