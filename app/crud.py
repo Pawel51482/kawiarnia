@@ -1,10 +1,11 @@
+from jose import JWTError, jwt
 from sqlalchemy.future import select
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from app.schemas import UserCreate, UserLogin
 from app.models import User
 from app.models import Coffee
-from app.auth import hash_password
+from app.auth import ALGORITHM, SECRET_KEY, create_access_token, hash_password, verify_password
 from app.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 
