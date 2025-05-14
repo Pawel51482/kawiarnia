@@ -4,7 +4,7 @@ from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from backend.schemas import UserCreate, UserLogin
 from backend.models import User
 from backend.models import Coffee
-from backend.auth import hash_password
+from backend.auth import hash_password, verify_password, create_access_token
 from backend.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 
