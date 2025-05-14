@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, EmailStr
 
 class CoffeeBase(BaseModel):
     name: str
@@ -16,10 +16,12 @@ class Coffee(CoffeeBase):
 
 class UserCreate(BaseModel):
     username: str
+    email: EmailStr
     password: str
 
 class UserLogin(BaseModel):
-    username: str
+    username: str | None = None
+    email: EmailStr | None = None
     password: str
 
 class Token(BaseModel):

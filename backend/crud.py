@@ -1,10 +1,11 @@
+from jose import JWTError, jwt
 from sqlalchemy.future import select
 from fastapi import FastAPI, Depends, HTTPException
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from backend.schemas import UserCreate, UserLogin
 from backend.models import User
 from backend.models import Coffee
-from backend.auth import hash_password, verify_password, create_access_token
+from backend.auth import ALGORITHM, SECRET_KEY, hash_password, verify_password, create_access_token
 from backend.database import get_db
 from sqlalchemy.ext.asyncio import AsyncSession
 
@@ -85,12 +86,13 @@ async def create_user(db, username: str, password: str):
     return user
 
 async def register_user(db: AsyncSession, user_data: UserCreate):
-    existing_user = await get_user_by_username(db, user_data.username)
-    if existing_user:
-        raise HTTPException(status_code=400, detail="Username already taken")
+    existing_user = await db.execute(select(User).where((User.username == user_data.username) | (User.email == user_data.email)))
+    if existing_user.scalars().first():
+        raise HTTPException(status_code=400, detail="Username or email already taken")
     
     new_user = User(
         username=user_data.username,
+        email=user_data.email,
         hashed_password=hash_password(user_data.password)
     )
     db.add(new_user)
@@ -101,7 +103,14 @@ async def register_user(db: AsyncSession, user_data: UserCreate):
     return {"access_token": token}
 
 async def login_user(db: AsyncSession, user_data: UserLogin):
-    user = await get_user_by_username(db, user_data.username)
+    if user_data.username:
+        user = await db.execute(select(User).where(User.username == user_data.username))
+    elif user_data.email:
+        user = await db.execute(select(User).where(User.email == user_data.email))
+    else:
+        raise HTTPException(status_code=400, detail="Either username or email must be provided")
+
+    user = user.scalars().first()
     if not user or not verify_password(user_data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
     
