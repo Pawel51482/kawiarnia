@@ -121,3 +121,28 @@ async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
     return user
+
+# Order
+async def create_order(db: AsyncSession, user_id: int, coffee_id: int, quantity: int):
+    new_order = Order(user_id=user_id, coffee_id=coffee_id, quantity=quantity)
+    db.add(new_order)
+    await db.commit()
+    await db.refresh(new_order)
+    return new_order
+
+async def get_orders_by_user(db: AsyncSession, user_id: int):
+    result = await db.execute(select(Order).where(Order.user_id == user_id))
+    return result.scalars().all()
+
+# Reservations
+async def create_reservation(db: AsyncSession, user_id: int, table_number: int, date, time):
+    reservation = Reservation(user_id=user_id, table_number=table_number, date=date, time=time)
+    db.add(reservation)
+    await db.commit()
+    await db.refresh(reservation)
+    return reservation
+
+async def get_reservations_by_user(db: AsyncSession, user_id: int):
+    result = await db.execute(select(Reservation).where(Reservation.user_id == user_id))
+    return result.scalars().all()
+
