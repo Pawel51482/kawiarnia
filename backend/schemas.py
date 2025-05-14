@@ -1,4 +1,6 @@
 from pydantic import BaseModel
+from typing import Optional
+from datetime import date, time
 
 class CoffeeBase(BaseModel):
     name: str
@@ -25,3 +27,32 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+
+class OrderCreate(BaseModel):
+    coffee_id: int
+    quantity: int
+
+class OrderRead(BaseModel):
+    id: int
+    coffee_id: int
+    quantity: int
+    status: str
+
+    class Config:
+        orm_mode = True
+
+class ReservationCreate(BaseModel):
+    table_number: int
+    date: date
+    time: time
+
+class ReservationRead(BaseModel):
+    id: int
+    table_number: int
+    date: date
+    time: time
+
+    class Config:
+        orm_mode = True
+
+
