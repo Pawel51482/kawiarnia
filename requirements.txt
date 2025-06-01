@@ -1,9 +1,0 @@
-fastapi>=0.103.1
-uvicorn>=0.23.2
-sqlalchemy
-asyncpg
-pydantic>=2.3.0
-passlib[bcrypt]
-python-jose
-python-multipart
-python-dotenv
