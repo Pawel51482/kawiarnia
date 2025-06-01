@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">coffe_shop</string>
+    <string name="title_home">Home</string>
+    <string name="title_profile">Profile</string>
+    <string name="title_favorites">Favorites</string>
+    <string name="title_shop">Shop</string>
+</resources>
