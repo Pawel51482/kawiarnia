@@ -17,13 +17,11 @@ class Coffee(CoffeeBase):
         orm_mode = True
 
 class UserCreate(BaseModel):
-    username: str
     email: EmailStr
     password: str
 
 class UserLogin(BaseModel):
-    username: str | None = None
-    email: EmailStr | None = None
+    email: EmailStr
     password: str
 
 class Token(BaseModel):
