@@ -14,8 +14,7 @@ class Coffee(Base):
   
 class User(Base):
     __tablename__ = "users"
-    id = Column(Integer, Sequence("user_id_seq"), primary_key=True, index=True, autoincrement=True)
-    username = Column(String, nullable=False)
+    id = Column(Integer, Sequence("coffee_id_seq"), primary_key=True, index=True, autoincrement=True)
     email = Column(String, unique=True, index=True)
     hashed_password = Column(String, nullable=False)
 
