@@ -14,8 +14,12 @@
     <fragment
         android:id="@+id/navigation_profile"
         android:name="com.example.coffe_shop.ui.profile.ProfileFragment"
-        android:label="@string/title_profile"
-        tools:layout="@layout/fragment_profile" />
+        android:label="Profil" >
+
+        <action
+            android:id="@+id/action_navigation_profile_to_navigation_register"
+            app:destination="@id/navigation_register" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorites"
@@ -28,4 +32,10 @@
         android:name="com.example.coffe_shop.ui.shop.ShopFragment"
         android:label="@string/title_shop"
         tools:layout="@layout/fragment_shop"/>
+
+    <fragment
+        android:id="@+id/navigation_register"
+        android:name="com.example.coffe_shop.ui.register.RegisterFragment"
+        android:label="Register"
+        tools:layout="@layout/fragment_register" />
 </navigation>
