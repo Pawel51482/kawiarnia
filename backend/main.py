@@ -58,7 +58,7 @@ async def login_endpoint(user_data: UserLogin, db: AsyncSession = Depends(get_db
 
 @app.get("/me")
 async def profile_endpoint(current_user = Depends(get_current_user)):
-    return {"username": current_user.username}
+    return {"email": current_user.email}
 
 @app.post("/orders/", response_model=OrderRead)
 async def make_order(order_data: OrderCreate, db: AsyncSession = Depends(get_db), current_user: User = Depends(get_current_user)):
