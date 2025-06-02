@@ -74,63 +74,45 @@ async def delete_coffee(db, coffee_id: int):
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"An error occurred: {str(e)}")
 
-async def get_user_by_username(db, username: str):
-    result = await db.execute(select(User).where(User.username == username))
+async def get_user_by_email(db: AsyncSession, email: str):
+    result = await db.execute(select(User).where(User.email == email))
     return result.scalars().first()
 
-async def create_user(db, username: str, password: str):
-    user = User(username=username, hashed_password=hash_password(password))
-    db.add(user)
-    await db.commit()
-    await db.refresh(user)
-    return user
-
 async def register_user(db: AsyncSession, user_data: UserCreate):
-    existing_user = await db.execute(select(User).where((User.username == user_data.username) | (User.email == user_data.email)))
-    if existing_user.scalars().first():
-        raise HTTPException(status_code=400, detail="Username or email already taken")
-    
+    existing_user = await get_user_by_email(db, user_data.email)
+    if existing_user:
+        raise HTTPException(status_code=400, detail="Email already taken")
     new_user = User(
-        username=user_data.username,
         email=user_data.email,
         hashed_password=hash_password(user_data.password)
     )
     db.add(new_user)
     await db.commit()
     await db.refresh(new_user)
-
-    token = create_access_token({"sub": new_user.username})
+    token = create_access_token({"sub": new_user.email})
     return {"access_token": token}
 
 async def login_user(db: AsyncSession, user_data: UserLogin):
-    if user_data.username:
-        user = await db.execute(select(User).where(User.username == user_data.username))
-    elif user_data.email:
-        user = await db.execute(select(User).where(User.email == user_data.email))
-    else:
-        raise HTTPException(status_code=400, detail="Either username or email must be provided")
-
-    user = user.scalars().first()
+    if not user_data.email:
+        raise HTTPException(status_code=400, detail="Email is required")
+    user = await get_user_by_email(db, user_data.email)
     if not user or not verify_password(user_data.password, user.hashed_password):
         raise HTTPException(status_code=401, detail="Invalid credentials")
-    
-    token = create_access_token({"sub": user.username})
+    token = create_access_token({"sub": user.email})
     return {"access_token": token}
 
 async def get_current_user(token: str = Depends(oauth2_scheme), db: AsyncSession = Depends(get_db)):
     try:
         payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        username = payload.get("sub")
-        if username is None:
+        email = payload.get("sub")
+        if email is None:
             raise HTTPException(status_code=401, detail="Invalid token")
     except JWTError:
         raise HTTPException(status_code=401, detail="Invalid token")
-    
-    user = await get_user_by_username(db, username)
+    user = await get_user_by_email(db, email)
     if user is None:
         raise HTTPException(status_code=401, detail="User not found")
     return user
-
 # Order
 async def create_order(db: AsyncSession, user_id: int, coffee_id: int, quantity: int):
     new_order = Order(user_id=user_id, coffee_id=coffee_id, quantity=quantity)
