@@ -14,11 +14,14 @@ import com.example.coffe_shop.data.RegisterRequest
 import com.example.coffe_shop.databinding.FragmentRegisterBinding
 import com.example.coffe_shop.network.RetrofitClient
 import kotlinx.coroutines.launch
+import androidx.fragment.app.activityViewModels
+import com.example.coffe_shop.SharedViewModel
 
 class RegisterFragment : Fragment() {
 
     private var _binding: FragmentRegisterBinding? = null
     private val binding get() = _binding!!
+    private val sharedViewModel: SharedViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -59,6 +62,7 @@ class RegisterFragment : Fragment() {
                     try {
                         val response = RetrofitClient.authApi.register(RegisterRequest(email, password, confirmPassword))
                         if (response.isSuccessful) {
+                            sharedViewModel.setLoggedIn(true)
                             val token = response.body()?.access_token ?: ""
                             requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
                                 .edit().putString("token", token).apply()
@@ -66,15 +70,18 @@ class RegisterFragment : Fragment() {
                             findNavController().navigate(R.id.navigation_profile)
                         } else {
                             Toast.makeText(context, "Rejestracja nie powiodła się", Toast.LENGTH_SHORT).show()
+                            sharedViewModel.setLoggedIn(false)
                         }
                     } catch (e: Exception) {
                         Toast.makeText(context, "Błąd: ${e.message}", Toast.LENGTH_LONG).show()
+                        sharedViewModel.setLoggedIn(false)
                     }
                 }
             }
 
         }
     }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
