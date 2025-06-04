@@ -48,7 +48,6 @@ class ProfileFragment : Fragment() {
                 try {
                     val response = RetrofitClient.authApi.login(LoginRequest(email, password))
                     if (response.isSuccessful) {
-                        sharedViewModel.setLoggedIn(true)
                         val newToken = response.body()?.access_token ?: ""
                         prefs.edit().putString("token", newToken).apply()
                         updateUI(true)
@@ -64,6 +63,11 @@ class ProfileFragment : Fragment() {
                     Toast.makeText(context, "Błąd: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
+        }
+
+        if (token != null) {
+            sharedViewModel.setLoggedIn(true)
+            updateUI(true)
         }
 
         // Rejestracja
@@ -94,3 +98,4 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 }
+

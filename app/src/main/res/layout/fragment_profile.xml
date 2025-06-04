@@ -103,28 +103,57 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:gravity="center"
                 android:layout_marginTop="24dp">
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnOrder" />
+                <Button
+                    android:id="@+id/btnOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_orders"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnPurchaseDetails" />
+                <Button
+                    android:id="@+id/btnPurchaseDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_purchase_details"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnAddress" />
+                <Button
+                    android:id="@+id/btnAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_addresses"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnPaymentMethod" />
+                <Button
+                    android:id="@+id/btnPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_payment_methods"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnAbout" />
+                <Button
+                    android:id="@+id/btnAbout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnHelp" />
+                <Button
+                    android:id="@+id/btnHelp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:layout_marginTop="24dp" />
 
-                <include layout="@layout/item_profile_button"
-                    android:id="@+id/btnLogout" />
+                <Button
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logout"
+                    android:layout_marginTop="24dp" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
