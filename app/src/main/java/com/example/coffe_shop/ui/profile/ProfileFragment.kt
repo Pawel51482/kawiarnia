@@ -51,6 +51,7 @@ class ProfileFragment : Fragment() {
                         val newToken = response.body()?.access_token ?: ""
                         prefs.edit().putString("token", newToken).apply()
                         updateUI(true)
+                        sharedViewModel.setLoggedIn(true)
                         Toast.makeText(context, "Zalogowano", Toast.LENGTH_SHORT).show()
                     } else {
                         sharedViewModel.setLoggedIn(false)
