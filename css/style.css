@@ -1,0 +1,49 @@
+/* style.css */
+:root {
+    --bg: #121212;
+    --text: #f1f1f1;
+    --accent: #ff914d;
+    --card: #1e1e1e;
+    --border: #333;
+  }
+  
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg);
+    color: var(--text);
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  
+  nav a {
+    color: var(--accent);
+    margin-right: 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  input, button, select {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 1rem;
+    background-color: #2a2a2a;
+    color: var(--text);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+  }
+  
+  button {
+    background-color: var(--accent);
+    color: #000;
+    cursor: pointer;
+    font-weight: bold;
+  }
