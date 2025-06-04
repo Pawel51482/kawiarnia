@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.coffe_shop.R
 import androidx.navigation.fragment.findNavController
+import com.example.coffe_shop.R
 import com.example.coffe_shop.SharedViewModel
 import com.example.coffe_shop.data.LoginRequest
 import com.example.coffe_shop.databinding.FragmentProfileBinding
@@ -35,7 +35,11 @@ class ProfileFragment : Fragment() {
         val prefs = requireContext().getSharedPreferences("auth", Context.MODE_PRIVATE)
         val token = prefs.getString("token", null)
         updateUI(token != null)
+        val btnOrder = view.findViewById<View>(R.id.btnOrder)
+        val btnLogout = view.findViewById<View>(R.id.btnLogout)
 
+
+        // Logowanie
         binding.loginButton.setOnClickListener {
             val email = binding.emailInput.text.toString()
             val password = binding.passwordInput.text.toString()
@@ -51,25 +55,32 @@ class ProfileFragment : Fragment() {
                         Toast.makeText(context, "Zalogowano", Toast.LENGTH_SHORT).show()
                     } else {
                         sharedViewModel.setLoggedIn(false)
-                        updateUI(true)
+                        updateUI(false)
                         Toast.makeText(context, "Błędne dane", Toast.LENGTH_SHORT).show()
                     }
                 } catch (e: Exception) {
                     sharedViewModel.setLoggedIn(false)
-                    updateUI(true)
+                    updateUI(false)
                     Toast.makeText(context, "Błąd: ${e.message}", Toast.LENGTH_LONG).show()
                 }
             }
         }
 
-        binding.logoutButton.setOnClickListener {
+        // Rejestracja
+        binding.goToRegister.setOnClickListener {
+            findNavController().navigate(R.id.navigation_register)
+        }
+
+        // Wylogowanie
+        btnLogout.setOnClickListener {
             prefs.edit().remove("token").apply()
             sharedViewModel.setLoggedIn(false)
             updateUI(false)
         }
 
-        binding.goToRegister.setOnClickListener {
-            findNavController().navigate(R.id.navigation_register)
+        // Przykład kliknięcia jednego z przycisków profilowych
+        btnOrder.setOnClickListener {
+            Toast.makeText(requireContext(), "Kliknięto 'Moje zamówienia'", Toast.LENGTH_SHORT).show()
         }
     }
 

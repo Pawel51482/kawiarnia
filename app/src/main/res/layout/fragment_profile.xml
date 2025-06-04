@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:padding="24dp">
 
-    <!-- Logowanie -->
+    <!-- LOGIN VIEW -->
     <LinearLayout
         android:id="@+id/login_view"
         android:orientation="vertical"
@@ -22,8 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Email"
-            android:minHeight="48dp"
-            />
+            android:minHeight="48dp" />
 
         <EditText
             android:id="@+id/password_input"
@@ -50,30 +49,84 @@
             android:layout_marginTop="16dp" />
     </LinearLayout>
 
-    <!-- Profil zalogowanego -->
-    <LinearLayout
+    <!-- PROFILE VIEW -->
+    <ScrollView
         android:id="@+id/profile_view"
-        android:orientation="vertical"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:visibility="gone"
+        android:fillViewport="true"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
 
-        <TextView
-            android:id="@+id/welcome_text"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Witaj!"
-            android:textSize="18sp" />
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center_horizontal">
 
-        <Button
-            android:id="@+id/logout_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Wyloguj się"
-            android:layout_marginTop="24dp" />
-    </LinearLayout>
+            <!-- Avatar -->
+            <ImageView
+                android:id="@+id/avatarImage"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_user_placeholder"
+                android:background="@drawable/avatar_circle_background"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/profile_avatar" />
+
+            <!-- Profile Title -->
+            <TextView
+                android:id="@+id/profileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/usernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_username"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Profile options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp">
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnOrder" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnPurchaseDetails" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnAddress" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnPaymentMethod" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnAbout" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnHelp" />
+
+                <include layout="@layout/item_profile_button"
+                    android:id="@+id/btnLogout" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
