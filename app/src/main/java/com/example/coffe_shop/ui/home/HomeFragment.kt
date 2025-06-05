@@ -5,23 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.coffe_shop.adapters.ProductAdapter
 import com.example.coffe_shop.databinding.FragmentHomeBinding
 import com.example.coffe_shop.models.Product
-import com.example.coffe_shop.network.RetrofitClient
 import com.example.coffe_shop.R
-import kotlinx.coroutines.launch
+import com.example.coffe_shop.SharedViewModel
+import com.example.coffe_shop.adapters.Mode
 
 class HomeFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var adapter: ProductAdapter
     private lateinit var viewModel: HomeViewModel
+    private val sharedViewModel: SharedViewModel by activityViewModels()
+
+    private lateinit var adapter: ProductAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,13 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.recyclerProducts.layoutManager = GridLayoutManager(requireContext(), 2)
 
-        adapter = ProductAdapter(emptyList())
+        adapter = ProductAdapter(emptyList(), Mode.HOME, onAddToCart = { product ->
+            sharedViewModel.addToCart(product)
+        })
+        binding.recyclerProducts.layoutManager = GridLayoutManager(requireContext(), 2)
+        binding.recyclerProducts.adapter = adapter
+
+
         binding.recyclerProducts.adapter = adapter
 
         viewModel.products.observe(viewLifecycleOwner) { products ->
@@ -50,4 +59,3 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
-

@@ -3,19 +3,31 @@ package com.example.coffe_shop.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.coffe_shop.models.Product
 import com.example.coffe_shop.R
 
-class ProductAdapter(private var coffees: List<Product>) :
-    RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
+enum class Mode {
+    HOME,
+    SHOP
+}
+
+class ProductAdapter(
+    private var coffees: List<Product>,
+    private val mode: Mode,
+    private val onAddToCart: ((Product) -> Unit)? = null,
+    private val onRemoveFromCart: ((Product) -> Unit)? = null
+) : RecyclerView.Adapter<ProductAdapter.ProductViewHolder>() {
 
     inner class ProductViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val image: ImageView = view.findViewById(R.id.imageProduct)
         val name: TextView = view.findViewById(R.id.textName)
         val price: TextView = view.findViewById(R.id.textPrice)
+        val actionButton: ImageButton = view.findViewById(R.id.buttonAction)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductViewHolder {
@@ -29,7 +41,8 @@ class ProductAdapter(private var coffees: List<Product>) :
     override fun onBindViewHolder(holder: ProductViewHolder, position: Int) {
         val coffee = coffees[position]
         holder.name.text = coffee.name
-        holder.price.text = "${coffee.price} zł"
+        val priceDouble = coffee.price.toDoubleOrNull() ?: 0.0
+        holder.price.text = String.format("%.2f zł", priceDouble)
 
         // Mapa nazw do ikon lokalnych
         val imageMap = mapOf(
@@ -42,10 +55,27 @@ class ProductAdapter(private var coffees: List<Product>) :
         )
 
         holder.image.setImageResource(imageMap[coffee.name] ?: R.drawable.coffee_placeholder)
+
+        when (mode) {
+            Mode.HOME -> {
+                holder.actionButton.setImageResource(R.drawable.ic_add)
+                holder.actionButton.setOnClickListener {
+                    onAddToCart?.invoke(coffee)
+                    Toast.makeText(holder.itemView.context, "${coffee.name} dodana do koszyka", Toast.LENGTH_SHORT).show()
+                }
+            }
+            Mode.SHOP -> {
+                holder.actionButton.setImageResource(R.drawable.ic_remove)
+                holder.actionButton.setOnClickListener {
+                    onRemoveFromCart?.invoke(coffee)
+                    Toast.makeText(holder.itemView.context, "${coffee.name} usunięta z koszyka", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
     }
+
     fun updateData(newCoffees: List<Product>) {
         coffees = newCoffees
         notifyDataSetChanged()
     }
 }
-

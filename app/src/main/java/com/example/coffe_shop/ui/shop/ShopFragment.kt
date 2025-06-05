@@ -4,36 +4,44 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.coffe_shop.databinding.FragmentProfileBinding
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.coffe_shop.SharedViewModel
+import com.example.coffe_shop.adapters.ProductAdapter
 import com.example.coffe_shop.databinding.FragmentShopBinding
 
 class ShopFragment : Fragment() {
 
     private var _binding: FragmentShopBinding? = null
-
-    // This property is only valid between onCreateView and
-    // onDestroyView.
     private val binding get() = _binding!!
 
+    private lateinit var sharedViewModel: SharedViewModel
+    private lateinit var adapter: ProductAdapter
+
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val profileViewModel =
-            ViewModelProvider(this).get(ShopViewModel::class.java)
-
         _binding = FragmentShopBinding.inflate(inflater, container, false)
-        val root: View = binding.root
+        return binding.root
+    }
 
-        val textView: TextView = binding.textShop
-        profileViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        sharedViewModel = ViewModelProvider(requireActivity())[SharedViewModel::class.java]
+
+        binding.recyclerShopItems.layoutManager = LinearLayoutManager(requireContext())
+
+        sharedViewModel.cartItems.observe(viewLifecycleOwner) { items ->
+            adapter = ProductAdapter(
+                items,
+                mode = com.example.coffe_shop.adapters.Mode.SHOP,
+                onRemoveFromCart = { product ->
+                    sharedViewModel.removeFromCart(product)
+                }
+            )
+            binding.recyclerShopItems.adapter = adapter
         }
-        return root
     }
 
     override fun onDestroyView() {
