@@ -3,7 +3,7 @@
     android:shape="rectangle">
 
     <!-- Tło karty -->
-    <solid android:color="?attr/colorSurface" />
+    <solid android:color="#1F232E" />
 
     <!-- Zaokrąglone rogi -->
     <corners android:radius="12dp" />

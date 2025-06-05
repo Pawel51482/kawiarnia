@@ -19,5 +19,7 @@
         <item name="android:textColorSecondary">@color/white2</item>
         <item name="android:textColorHint">#B18C8686</item>
 
+        <item name="android:windowBackground">@color/start_screen</item>
+
     </style>
 </resources>

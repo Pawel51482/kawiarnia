@@ -9,4 +9,5 @@
     <color name="white">#FFFFFFFF</color>
     <color name="white2">#FFFFF0</color>
     <color name="orange">#D2842F</color>
+    <color name="start_screen">#E3D4D4</color>
 </resources>
