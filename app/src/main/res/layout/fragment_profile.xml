@@ -107,34 +107,43 @@
                 android:layout_marginTop="24dp">
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnOrder"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_orders"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_order"/>
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnPurchaseDetails"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_purchase_details"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_purchase_details"/>
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnAddress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_addresses"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_address"/>
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnPaymentMethod"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/profile_payment_methods"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_payment"/>
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnAbout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -142,18 +151,24 @@
                     android:layout_marginTop="24dp" />
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnHelp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/help"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_help"/>
 
                 <Button
+                    style="@style/ProfileButton"
                     android:id="@+id/btnLogout"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/logout"
-                    android:layout_marginTop="24dp" />
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:drawableEnd="@drawable/ic_logout"/>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

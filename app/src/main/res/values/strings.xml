@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">coffe_shop</string>
-    <string name="title_home">Home</string>
-    <string name="title_profile">Profile</string>
-    <string name="title_favorites">Favorites</string>
-    <string name="title_shop">Shop</string>
+    <string name="title_home">Strona główna</string>
+    <string name="title_profile">Profil</string>
+    <string name="title_favorites">Ulubione</string>
+    <string name="title_shop">Sklep</string>
     <string name="profile_orders">Moje zamówienia</string>
     <string name="profile_purchase_details">Szczegóły płatności</string>
     <string name="profile_addresses">Adresy dostawy</string>
@@ -21,4 +21,8 @@
     <string name="about">Informacje o koncie</string>
     <string name="help">Pomoc i kontakt</string>
     <string name="logout">Wyloguj się</string>
+    <string name="cappuccino">Cappuccino</string>
+    <string name="macchiato">Macchiato</string>
+    <string name="hot_coffee">Gorąca kawa</string>
+    <string name="special_for_you">Oferta dla Ciebie</string>
 </resources>
