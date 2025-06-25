@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="24dp">
+
+    <!-- LOGIN VIEW -->
+    <LinearLayout
+        android:id="@+id/login_view"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <EditText
+            android:id="@+id/email_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:minHeight="48dp" />
+
+        <EditText
+            android:id="@+id/password_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Hasło"
+            android:inputType="textPassword"
+            android:minHeight="48dp" />
+
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Zaloguj się"
+            android:layout_marginTop="24dp" />
+
+        <TextView
+            android:id="@+id/goToRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nie masz konta? Zarejestruj się"
+            android:textColor="@android:color/holo_blue_dark"
+            android:layout_marginTop="16dp" />
+    </LinearLayout>
+
+    <!-- PROFILE VIEW -->
+    <ScrollView
+        android:id="@+id/profile_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:fillViewport="true"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp"
+            android:gravity="center_horizontal">
+
+            <!-- Avatar -->
+            <ImageView
+                android:id="@+id/avatarImage"
+                android:layout_width="96dp"
+                android:layout_height="96dp"
+                android:layout_marginTop="16dp"
+                android:src="@drawable/ic_user_placeholder"
+                android:background="@drawable/avatar_circle_background"
+                android:scaleType="centerCrop"
+                android:contentDescription="@string/profile_avatar" />
+
+            <!-- Profile Title -->
+            <TextView
+                android:id="@+id/profileTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_title"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:layout_marginTop="12dp" />
+
+            <!-- Username -->
+            <TextView
+                android:id="@+id/usernameText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_username"
+                android:textSize="16sp"
+                android:layout_marginTop="4dp" />
+
+            <!-- Profile options -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginTop="24dp">
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnOrder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_orders"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_order"/>
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnPurchaseDetails"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_purchase_details"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_purchase_details"/>
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnAddress"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_addresses"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_address"/>
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnPaymentMethod"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/profile_payment_methods"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_payment"/>
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnAbout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/about"
+                    android:layout_marginTop="24dp" />
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnHelp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/help"
+                    android:layout_marginTop="24dp"
+                    android:drawableEnd="@drawable/ic_help"/>
+
+                <Button
+                    style="@style/ProfileButton"
+                    android:id="@+id/btnLogout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/logout"
+                    android:layout_marginTop="24dp"
+                    android:layout_marginBottom="24dp"
+                    android:drawableEnd="@drawable/ic_logout"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

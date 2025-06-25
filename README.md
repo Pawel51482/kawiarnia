@@ -1,2 +1,1 @@
-# kawiarnia
-Nowatorski projekt zespołowy
+# Coffe Shop App
